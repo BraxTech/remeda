@@ -49,7 +49,6 @@
 - adjust
 - all
 - any
-- aperture
 - collectBy
 - count
 - dropRepeats

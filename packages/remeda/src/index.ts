@@ -121,6 +121,7 @@ export * from "./set";
 export * from "./setPath";
 export * from "./shuffle";
 export * from "./sliceString";
+export * from "./sliding";
 export * from "./sort";
 export * from "./sortBy";
 export * from "./sortedIndex";
