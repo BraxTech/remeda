@@ -42,15 +42,14 @@ type Sliding<T extends IterableContainer, N extends number> =
 // Only the required and suffix elements are guaranteed to be there; optional
 // and rest elements might not be. When those alone fill a whole window we know
 // the output can't be empty.
-type SlidingWindows<T extends IterableContainer, Window, N extends number> =
-  [
-    ...TupleParts<T>["required"],
-    ...TupleParts<T>["suffix"],
-  ]["length"] extends infer GuaranteedLength extends number
-    ? GreaterThanOrEqual<GuaranteedLength, N> extends true
-      ? [Window, ...Window[]]
-      : Window[]
-    : never;
+type SlidingWindows<T extends IterableContainer, Window, N extends number> = [
+  ...TupleParts<T>["required"],
+  ...TupleParts<T>["suffix"],
+]["length"] extends infer GuaranteedLength extends number
+  ? GreaterThanOrEqual<GuaranteedLength, N> extends true
+    ? [Window, ...Window[]]
+    : Window[]
+  : never;
 
 /**
  * Returns every contiguous window of `size` elements, in order. Windows overlap
