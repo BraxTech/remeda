@@ -108,7 +108,9 @@ describe("lazy", () => {
   });
 
   test("emits nothing while warming up", () => {
-    const mockFunc = vi.fn<(x: number) => number>((x) => x);
+    const mockFunc = vi.fn<(window: readonly number[]) => number>(
+      ({ length }) => length,
+    );
 
     pipe([1, 2, 3], sliding(5), map(mockFunc));
 
