@@ -13,6 +13,6 @@ coverage/
 .playwright-mcp/
 
 # Evidence and run artifacts written by the agentic-kit tooling (ship.sh).
-.agentic/
+/.agentic/
 
 .DS_Store
