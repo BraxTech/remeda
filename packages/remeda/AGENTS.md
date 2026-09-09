@@ -46,7 +46,9 @@ Otherwise: decide, note the decision in the PR, and keep going.
 
 ## Known mistakes (append one line per agent mistake, same day)
 <!-- Format: `- YYYY-MM-DD: <what went wrong> → <rule>` -->
-- <date>: <example: agent reported done without running eval> → always run `make e2e` and attach output.
+- 2026-09-08: added a root `Makefile` without checking whether one already existed deeper in the tree; `packages/remeda/Makefile` did, and is what CI runs, so the root copy was a weaker duplicate that dropped `prettier --check`, knip, and the test-inclusive typecheck → search the whole tree for an existing target or config before adding one at the root; if it exists, forward to it rather than restating it.
+- 2026-09-08: wrote `test.prop` callbacks as concise arrow bodies, so each returned the `expect()` value and fast-check read every property as failed → give fast-check predicates block bodies that return nothing.
+- 2026-09-08: typed a lazy-pipe test mock as `(x: number)` when the stage after `sliding` actually receives windows; it passed only because the assertion was that the mock is never called → type a pipe-stage mock to that stage's real input, not the array's element type.
 
 ## Non-goals / do not touch
 - <e.g. do not edit `eval/cases.json` — it is the frozen evaluator>
