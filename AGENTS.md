@@ -119,3 +119,13 @@ Format: `<TYPE>(<scope>): description` where scope is the function name.
 * scope is used to communicate which utility function was changed in `feat`, `fix`, and `docs` commits (which touch specific functions). It is optional for `chore` commits where there isn't a specific sub-component that is being changed.
 
 IMPORTANT: Remeda uses **inverted** `semantic-release` semantics - `feat:` -> patch (additive, safe), `fix:` -> minor (behavior change, risky). See `packages/remeda/release.config.js`.
+
+## Standards
+- Code: follow `packages/remeda/docs/STANDARDS.md` (core rules + language profiles). Security: follow `packages/remeda/docs/SECURITY.md`.
+
+## Known mistakes (append one line per agent mistake, same day)
+<!-- Format: `- YYYY-MM-DD: <what went wrong> → <rule>` -->
+- 2026-09-08: added a root `Makefile` without checking whether one already existed deeper in the tree; `packages/remeda/Makefile` did, and is what CI runs, so the root copy was a weaker duplicate that dropped `prettier --check`, knip, and the test-inclusive typecheck → search the whole tree for an existing target or config before adding one at the root; if it exists, forward to it rather than restating it.
+- 2026-09-08: wrote `test.prop` callbacks as concise arrow bodies, so each returned the `expect()` value and fast-check read every property as failed → give fast-check predicates block bodies that return nothing.
+- 2026-09-08: typed a lazy-pipe test mock as `(x: number)` when the stage after `sliding` actually receives windows; it passed only because the assertion was that the mock is never called → type a pipe-stage mock to that stage's real input, not the array's element type.
+
